@@ -1,0 +1,11 @@
+= Ansible role: Install Docker CE
+
+Designed for Ubuntu, tested on all versions from 18.04 to 19.10
+
+Requires Python pip module
+
+Will produce a warning: `[WARNING]: reset_connection task does not support when conditional` after
+successfully adding a user: this is expected behavior
+
+== Variables
+`system_user` - system user to add to docker group
