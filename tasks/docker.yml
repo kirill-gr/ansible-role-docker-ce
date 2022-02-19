@@ -6,17 +6,10 @@
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
   become: yes
-  register: docker_repo_key
 - name: Add Docker repository
   apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
   become: yes
-  register: docker_repo
-- name: Update repositories
-  apt:
-    update_cache: yes
-  become: yes
-  when: docker_repo_key.changed or docker_repo.changed
 - name: Install Docker
   apt:
     name:
@@ -36,5 +29,5 @@
   become: yes
   register: docker_group
 - name: Reset connection to start a new session
-  include_tasks: reset_connection.yml
+  meta: reset_connection
   when: docker_group.changed
